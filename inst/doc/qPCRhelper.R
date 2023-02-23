@@ -1,0 +1,19 @@
+## ---- include = FALSE---------------------------------------------------------
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+## ----setup--------------------------------------------------------------------
+library(qPCRhelper)
+library(ggplot2)
+#Generate sample data
+Sample <- c("C1", "C2", "T1", "T2")
+Group <- c("Control", "Control", "Treatment", "Treatment")
+GAPDH <- c("18.1", "18.2", "17.9", "18.0")
+IL4R <- c("32.4", "32.8", "20.2", "21.3")
+qpcr_data <- data.frame(Sample, Group, GAPDH, IL4R)
+write.table(qpcr_data, file = "qpcr_data.txt", sep = "\t", row.names = F)
+
+qpcr_out <- qPCRhelper(data.dir = "./qpcr_data.txt", ref.gene = "GAPDH", ref.group = "Control")
+
